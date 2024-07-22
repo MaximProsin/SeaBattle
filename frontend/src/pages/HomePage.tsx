@@ -5,14 +5,14 @@ const HomePage: Component = () => {
   return (
     <div class="flex flex-col items-center justify-center h-screen">
       <h1 class="text-4xl font-bold">Seabattle</h1>
-      <p class="text-xl">A battle simulator for sea creatures</p>
+      <p class="text-xl">Мультиплеер для классичекого морского боя</p>
       <div class="flex gap-2 mt-2">
-        <A href="/login">
+        <A href="/register">
           <button
             type="button"
             class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-emerald-500 text-white hover:bg-emerald-700 focus:outline-none focus:bg-emerald-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-white"
           >
-            Create account
+            Зарегистрироваться
           </button>
         </A>
         <A href="/login">
@@ -20,7 +20,7 @@ const HomePage: Component = () => {
             type="button"
             class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-500 text-white hover:bg-teal-700 focus:outline-none focus:bg-teal-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-white"
           >
-            Login
+            Войти
           </button>
         </A>
       </div>
