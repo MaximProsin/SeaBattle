@@ -1,10 +1,11 @@
-import { Component, lazy } from "solid-js";
 import { RouteDefinition, Router } from "@solidjs/router";
+import { Component } from "solid-js";
+import HomePage from "../pages/HomePage";
 
 const routes = [
   {
     path: "/",
-    component: lazy(() => import("../pages/HomePage")),
+    component: HomePage,
   },
 ] satisfies RouteDefinition[];
 
