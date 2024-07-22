@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=seabattle
+
+  backend:
+    image: seabattle-backend
+    build: ./backend
+    environment:
+      - SeaBattle__DbConnection=Server=postgres;Port=5432;Database=seabattle;User Id=postgres;Password=postgres;
+    depends_on:
+      - postgres
+
+  frontend:
+    image: seabattle-frontend
+    build: ./frontend
+    ports:
+      - 80:80
+    depends_on:
+      - backend
