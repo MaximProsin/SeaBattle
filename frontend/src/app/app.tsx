@@ -15,6 +15,10 @@ const routes = [
     path: "/register",
     component: lazy(() => import("../pages/RegisterPage")),
   },
+  {
+    path: "/rooms",
+    component: lazy(() => import("../pages/RoomPage")),
+  },
 ] satisfies RouteDefinition[];
 
 export const App: Component = () => {

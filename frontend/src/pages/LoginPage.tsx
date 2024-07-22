@@ -2,11 +2,11 @@ import { A } from "@solidjs/router";
 
 const LoginPage = () => {
   return (
-    <div class="flex flex-col items-center justify-center h-screen">
-      <div class="rounded-3xl min-w-[400px] flex flex-col gap-2">
+    <div class="flex flex-col items-center justify-center h-[100dvh] dark:bg-neutral-950 dark:text-white">
+      <div class="rounded-3xl min-w-[300px] flex flex-col gap-2">
         <span class="text-xl">Авторизация</span>
         <div>
-          <label for="username" class="text-gray-700">
+          <label for="username" class="text-gray-700 dark:text-gray-100">
             Имя пользователя:
           </label>
           <input
@@ -17,7 +17,7 @@ const LoginPage = () => {
           />
         </div>
         <div>
-          <label for="password" class="text-gray-700">
+          <label for="password" class="text-gray-700 dark:text-gray-100">
             Пароль:
           </label>
           <input
@@ -35,7 +35,9 @@ const LoginPage = () => {
             Войти
           </button>
           <A href="/register">
-            <button class="text-gray-500">Зарегистрироваться</button>
+            <button class="text-gray-500 dark:text-gray-50">
+              Зарегистрироваться
+            </button>
           </A>
         </div>
       </div>
