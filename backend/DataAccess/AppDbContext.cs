@@ -11,11 +11,12 @@ public class AppDbContext : DbContext
     {
         _configuration = configuration;
     }
-        
+
     public DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DbConnection"));
+        string? connectionString = _configuration.GetConnectionString("DbConnection") ?? Environment.GetEnvironmentVariable("DOTNET_DbConnection");
+        optionsBuilder.UseNpgsql(connectionString);
     }
 }

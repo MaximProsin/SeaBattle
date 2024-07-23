@@ -29,6 +29,8 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Admin", policy => policy.RequireRole("admin"));
 });
 
+builder.Configuration.AddEnvironmentVariables();
+
 builder.Services.AddTransient<AuthService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
@@ -69,6 +71,8 @@ builder.Services.AddSwaggerGen(c =>
 
     c.AddSecurityRequirement(securityRequirement);
 });
+
+
 var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
@@ -78,15 +82,18 @@ using var scope = app.Services.CreateScope();
 await using var usersDbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 await usersDbContext.Database.EnsureCreatedAsync();
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1.0.0/swagger.json", "Sea Battle Version 1.0.0");
-    });
-}
+    c.RouteTemplate = "api/{documentName}/swagger.json";
+});
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/api/v1.0.0/swagger.json", "Sea Battle Version 1.0.0");
+    c.RoutePrefix = "api/swagger-ui";
+});
 
+
+app.MapSwagger("/api/{documentName}/swagger.{json|yaml}");
 app.MapControllers();
 
 app.Run();

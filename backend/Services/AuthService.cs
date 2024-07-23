@@ -34,7 +34,7 @@ public class AuthService
     {
         var claims = new ClaimsIdentity();
         claims.AddClaim(new Claim(ClaimTypes.Name, user.Email));
-        
+
         return claims;
     }
 }
