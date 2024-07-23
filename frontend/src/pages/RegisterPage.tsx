@@ -1,11 +1,13 @@
+import { A, useNavigate } from "@solidjs/router";
 import { createSignal } from "solid-js";
-import { A, redirect } from "@solidjs/router";
 import { identificationApi } from "../shared/lib";
 
 const RegisterPage = () => {
   const [username, setUsername] = createSignal("");
   const [email, setEmail] = createSignal("");
   const [password, setPassword] = createSignal("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     const res = await identificationApi.registerPostRaw({
@@ -17,7 +19,7 @@ const RegisterPage = () => {
     });
 
     if (res.raw.ok) {
-      throw redirect("/rooms");
+      navigate("/rooms");
     } else {
       alert("Произошла ошибка при регистрации");
     }

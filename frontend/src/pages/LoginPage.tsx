@@ -1,10 +1,12 @@
-import { A, redirect } from "@solidjs/router";
+import { A, useNavigate } from "@solidjs/router";
 import { createSignal } from "solid-js";
 import { identificationApi } from "../shared/lib";
 
 const LoginPage = () => {
   const [username, setUsername] = createSignal("");
   const [password, setPassword] = createSignal("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     const res = await identificationApi.loginPostRaw({
@@ -15,7 +17,7 @@ const LoginPage = () => {
     });
 
     if (res.raw.ok) {
-      throw redirect("/rooms");
+      navigate("/rooms");
     } else {
       alert("Неверный логин или пароль");
     }
