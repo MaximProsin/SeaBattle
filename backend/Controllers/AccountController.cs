@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace backend.Controllers
 {
     [ApiController]
-    [Route("auth")]
+    [Route("/auth")]
     public class IdentificationController : ControllerBase
     {
         private readonly AppDbContext _appDbContext;
@@ -18,7 +18,7 @@ namespace backend.Controllers
             _appDbContext = appDbContext;
         }
 
-        [HttpPost("register")]
+        [HttpPost("/register")]
         public async Task<IActionResult> Register([FromBody] CreateUserRequest request, AuthService authService)
         {
             var existingUser = await _appDbContext.Users.FirstOrDefaultAsync(u => u.UserName == request.UserName);
@@ -43,7 +43,7 @@ namespace backend.Controllers
             return Ok(token);
         }
 
-        [HttpPost("authorization")]
+        [HttpPost("/login")]
         public async Task<IActionResult> Authorization([FromBody] AuthUserRequest request, AuthService authService)
         {
             var existingUser =
