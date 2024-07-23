@@ -25,11 +25,11 @@ import {
     CreateUserRequestToJSON,
 } from '../models/index';
 
-export interface AuthAuthorizationPostRequest {
+export interface LoginPostRequest {
     authUserRequest?: AuthUserRequest;
 }
 
-export interface AuthRegisterPostRequest {
+export interface RegisterPostRequest {
     createUserRequest?: CreateUserRequest;
 }
 
@@ -40,7 +40,7 @@ export class IdentificationApi extends runtime.BaseAPI {
 
     /**
      */
-    async authAuthorizationPostRaw(requestParameters: AuthAuthorizationPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+    async loginPostRaw(requestParameters: LoginPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -56,7 +56,7 @@ export class IdentificationApi extends runtime.BaseAPI {
             }
         }
         const response = await this.request({
-            path: `/auth/authorization`,
+            path: `/login`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -68,13 +68,13 @@ export class IdentificationApi extends runtime.BaseAPI {
 
     /**
      */
-    async authAuthorizationPost(requestParameters: AuthAuthorizationPostRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.authAuthorizationPostRaw(requestParameters, initOverrides);
+    async loginPost(requestParameters: LoginPostRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.loginPostRaw(requestParameters, initOverrides);
     }
 
     /**
      */
-    async authRegisterPostRaw(requestParameters: AuthRegisterPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+    async registerPostRaw(requestParameters: RegisterPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -90,7 +90,7 @@ export class IdentificationApi extends runtime.BaseAPI {
             }
         }
         const response = await this.request({
-            path: `/auth/register`,
+            path: `/register`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -102,8 +102,8 @@ export class IdentificationApi extends runtime.BaseAPI {
 
     /**
      */
-    async authRegisterPost(requestParameters: AuthRegisterPostRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.authRegisterPostRaw(requestParameters, initOverrides);
+    async registerPost(requestParameters: RegisterPostRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.registerPostRaw(requestParameters, initOverrides);
     }
 
 }

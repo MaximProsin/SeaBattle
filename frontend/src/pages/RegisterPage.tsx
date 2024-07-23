@@ -8,7 +8,7 @@ const RegisterPage = () => {
   const [password, setPassword] = createSignal("");
 
   const handleSubmit = async () => {
-    const res = await identificationApi.authRegisterPostRaw({
+    const res = await identificationApi.registerPostRaw({
       createUserRequest: {
         userName: username(),
         email: email(),

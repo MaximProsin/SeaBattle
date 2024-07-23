@@ -7,7 +7,7 @@ const LoginPage = () => {
   const [password, setPassword] = createSignal("");
 
   const handleSubmit = async () => {
-    const res = await identificationApi.authAuthorizationPostRaw({
+    const res = await identificationApi.loginPostRaw({
       authUserRequest: {
         userName: username(),
         password: password(),
