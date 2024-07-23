@@ -2,14 +2,13 @@ using backend.Contracts;
 using backend.DataAccess;
 using backend.Models;
 using backend.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/auth")]
     public class IdentificationController : ControllerBase
     {
         private readonly AppDbContext _appDbContext;
@@ -43,18 +42,18 @@ namespace backend.Controllers
 
             return Ok(token);
         }
-        
+
         [HttpPost("authorization")]
         public async Task<IActionResult> Authorization([FromBody] AuthUserRequest request, AuthService authService)
         {
             var existingUser =
                 await _appDbContext.Users.FirstOrDefaultAsync(u =>
-                    (u.UserName == request.UserName && u.Password == request.Password));
+                    u.UserName == request.UserName && u.Password == request.Password);
             if (existingUser == null)
             {
                 return BadRequest("Такого пользователя не существует");
             }
-            
+
             var token = authService.GenerateToken(existingUser);
             return Ok(token);
         }
