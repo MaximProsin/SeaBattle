@@ -16,7 +16,7 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        string? connectionString = _configuration.GetConnectionString("DbConnection") ?? Environment.GetEnvironmentVariable("DOTNET_DbConnection");
+        string? connectionString = Environment.GetEnvironmentVariable("DOTNET_DbConnection") ?? _configuration.GetConnectionString("DbConnection");
         optionsBuilder.UseNpgsql(connectionString);
     }
 }

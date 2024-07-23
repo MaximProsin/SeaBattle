@@ -86,12 +86,12 @@ await usersDbContext.Database.EnsureCreatedAsync();
 
 app.UseSwagger(c =>
 {
-    c.RouteTemplate = "api/{documentName}/swagger.json";
+    c.RouteTemplate = "{documentName}/swagger.json";
 });
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/api/v1.0.0/swagger.json", "Sea Battle Version 1.0.0");
-    c.RoutePrefix = "api/swagger-ui";
+    c.RoutePrefix = "swagger-ui";
 });
 
 

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace backend.Controllers
 {
     [ApiController]
-    [Route("/auth")]
+    [Route("auth")]
     public class IdentificationController : ControllerBase
     {
         private readonly AppDbContext _appDbContext;
