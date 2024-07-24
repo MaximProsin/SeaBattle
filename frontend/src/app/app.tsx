@@ -1,6 +1,10 @@
 import { RouteDefinition, Router } from "@solidjs/router";
-import { Component, lazy } from "solid-js";
+import { Component } from "solid-js";
+import { Toaster } from "solid-sonner";
 import HomePage from "../pages/HomePage";
+import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
+import RoomsPage from "../pages/RoomPage";
 
 const routes = [
   {
@@ -9,18 +13,23 @@ const routes = [
   },
   {
     path: "/login",
-    component: lazy(() => import("../pages/LoginPage")),
+    component: LoginPage,
   },
   {
     path: "/register",
-    component: lazy(() => import("../pages/RegisterPage")),
+    component: RegisterPage,
   },
   {
     path: "/rooms",
-    component: lazy(() => import("../pages/RoomPage")),
+    component: RoomsPage,
   },
 ] satisfies RouteDefinition[];
 
 export const App: Component = () => {
-  return <Router>{routes}</Router>;
+  return (
+    <>
+      <Router>{routes}</Router>
+      <Toaster />
+    </>
+  );
 };

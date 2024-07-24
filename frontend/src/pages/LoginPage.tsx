@@ -1,6 +1,7 @@
 import { A, useNavigate } from "@solidjs/router";
 import { createSignal } from "solid-js";
 import { identificationApi } from "../shared/lib";
+import { toast } from "solid-sonner";
 
 const LoginPage = () => {
   const [username, setUsername] = createSignal("");
@@ -9,17 +10,24 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    const res = await identificationApi.loginPostRaw({
-      authUserRequest: {
-        userName: username(),
-        password: password(),
-      },
-    });
+    try {
+      const res = await identificationApi.loginPostRaw({
+        authUserRequest: {
+          userName: username(),
+          password: password(),
+        },
+      });
 
-    if (res.raw.ok) {
-      navigate("/rooms");
-    } else {
-      alert("Неверный логин или пароль");
+      if (res.raw.ok) {
+        toast.info("Вы успешно вошли в систему");
+        navigate("/rooms");
+      } else {
+        toast.error("Неверный логин или пароль");
+      }
+    } catch (e) {
+      toast.error("Неизвестная ошибка: ", {
+        description: (e as Error).message,
+      });
     }
   };
 

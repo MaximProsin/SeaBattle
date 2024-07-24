@@ -1,6 +1,7 @@
 import { A, useNavigate } from "@solidjs/router";
 import { createSignal } from "solid-js";
 import { identificationApi } from "../shared/lib";
+import { toast } from "solid-sonner";
 
 const RegisterPage = () => {
   const [username, setUsername] = createSignal("");
@@ -10,18 +11,25 @@ const RegisterPage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    const res = await identificationApi.registerPostRaw({
-      createUserRequest: {
-        userName: username(),
-        email: email(),
-        password: password(),
-      },
-    });
+    try {
+      const res = await identificationApi.registerPostRaw({
+        createUserRequest: {
+          userName: username(),
+          email: email(),
+          password: password(),
+        },
+      });
 
-    if (res.raw.ok) {
-      navigate("/rooms");
-    } else {
-      alert("Произошла ошибка при регистрации");
+      if (res.raw.ok) {
+        toast.info("Вы успешно зарегистрировались");
+        navigate("/rooms");
+      } else {
+        toast.error("Произошла ошибка при регистрации");
+      }
+    } catch (e) {
+      toast.error("Неизвестная ошибка: ", {
+        description: (e as Error).message,
+      });
     }
   };
 
